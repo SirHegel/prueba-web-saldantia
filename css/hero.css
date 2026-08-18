@@ -1,0 +1,737 @@
+/* =============================================================================
+   SALDANTIA — hero.css
+   Navegación fija (.nav) y sección de portada (.hero).
+
+   Consume exclusivamente los tokens de base.css: aquí no hay hex ni px sueltos
+   salvo hairlines (1px) y las tres medidas propias del hero, que se declaran
+   como custom properties locales en el bloque .hero.
+
+   El indicador de scroll se dibuja con los pseudo-elementos de .hero: el
+   marcado no lo incluye y esta hoja no debe modificarlo.
+   ========================================================================== */
+
+/* =============================================================================
+   1. NAVEGACIÓN
+   ========================================================================== */
+
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: var(--z-nav);
+  height: var(--nav-height);
+  background-color: rgba(10, 10, 10, 0.55);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(160%);
+  border-bottom: 1px solid transparent;
+  transition: background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+
+/* Sin soporte de desenfoque el fondo translúcido dejaría el texto ilegible */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .nav {
+    background-color: rgba(10, 10, 10, 0.94);
+  }
+}
+
+/* Estado que aplica scroll.js al separarse de la portada. Se aceptan las dos
+   convenciones de nombre para no atar esta hoja a una implementación concreta */
+.nav.is-scrolled,
+.nav--scrolled {
+  background-color: rgba(10, 10, 10, 0.82);
+  border-bottom-color: var(--border);
+  box-shadow: var(--shadow);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  height: 100%;
+}
+
+/* --- Logotipo --------------------------------------------------------- */
+
+.nav__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  flex: 0 0 auto;
+  color: var(--text);
+}
+
+.nav__logo:hover {
+  color: var(--text);
+}
+
+.nav__logo-mark {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--accent);
+  color: var(--text-on-accent);
+  font-family: var(--font-display);
+  font-size: var(--fs-5);
+  line-height: 1;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 1px var(--border-accent);
+  transition: background-color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease),
+              transform var(--dur) var(--ease-out);
+}
+
+.nav__logo:hover .nav__logo-mark {
+  background-color: var(--accent-hover);
+  box-shadow: var(--shadow-accent);
+  transform: rotate(-4deg);
+}
+
+.nav__logo-text {
+  font-family: var(--font-display);
+  font-size: var(--fs-6);
+  line-height: 1;
+  letter-spacing: var(--ls-snug);
+}
+
+/* --- Menú y enlaces --------------------------------------------------- */
+
+.nav__menu {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.nav__list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.nav__link {
+  position: relative;
+  display: inline-block;
+  padding-block: var(--space-3xs);
+  font-size: var(--fs-3);
+  font-weight: var(--fw-medium);
+  color: var(--text-muted);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+/* Subrayado que crece desde la izquierda; se repliega hacia la derecha al salir */
+.nav__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background-color: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.nav__link:hover,
+.nav__link:focus-visible,
+.nav__link--activo,
+.nav__link[aria-current='true'],
+.nav__link[aria-current='page'] {
+  color: var(--text);
+}
+
+.nav__link:hover::after,
+.nav__link:focus-visible::after,
+.nav__link--activo::after,
+.nav__link[aria-current='true']::after,
+.nav__link[aria-current='page']::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* El CTA de la barra no necesita el sobrepeso de sombra del botón principal */
+.nav__cta {
+  box-shadow: none;
+}
+
+.nav__cta:hover {
+  box-shadow: var(--shadow-accent);
+}
+
+/* --- Hamburguesa ------------------------------------------------------ */
+
+.nav__toggle {
+  display: none;
+  place-content: center;
+  flex: 0 0 auto;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-right: calc(var(--space-2xs) * -1);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--dur-fast) var(--ease);
+}
+
+.nav__toggle:hover {
+  background-color: var(--surface-raised);
+}
+
+.nav__toggle-bar {
+  display: block;
+  width: 1.375rem;
+  height: 2px;
+  background-color: var(--text);
+  border-radius: var(--radius-pill);
+  transition: transform var(--dur) var(--ease-out),
+              opacity var(--dur-fast) var(--ease),
+              width var(--dur) var(--ease-out);
+}
+
+.nav__toggle-bar + .nav__toggle-bar {
+  margin-top: 6px;
+  width: 0.875rem;
+  margin-left: auto;
+}
+
+/* Las dos barras se cruzan en aspa al abrir el menú */
+.nav__toggle[aria-expanded='true'] .nav__toggle-bar {
+  width: 1.375rem;
+}
+
+.nav__toggle[aria-expanded='true'] .nav__toggle-bar:first-child {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.nav__toggle[aria-expanded='true'] .nav__toggle-bar:last-child {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+/* =============================================================================
+   2. NAVEGACIÓN EN MÓVIL (< 768px)
+   El panel se despliega bajo la barra. Se apoya en aria-expanded del botón
+   —única fuente de verdad del marcado— y admite además las clases is-open /
+   nav--open por si scroll.js prefiere conmutar clases.
+   ========================================================================== */
+
+@media (max-width: 767.98px) {
+  .nav__toggle {
+    display: grid;
+  }
+
+  .nav__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-xs);
+    padding: var(--space-md) var(--container-pad) var(--space-lg);
+    background-color: rgba(10, 10, 10, 0.94);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+
+    /* Oculto y fuera del orden de tabulación mientras está plegado */
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-0.75rem);
+    pointer-events: none;
+    transition: opacity var(--dur) var(--ease),
+                transform var(--dur) var(--ease-out),
+                visibility 0s linear var(--dur);
+  }
+
+  .nav__inner:has(.nav__toggle[aria-expanded='true']) .nav__menu,
+  .nav.is-open .nav__menu,
+  .nav--open .nav__menu,
+  .nav__menu.is-open {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition-delay: 0s;
+  }
+
+  .nav__list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .nav__item + .nav__item {
+    border-top: 1px solid var(--border);
+  }
+
+  .nav__link {
+    display: block;
+    padding-block: var(--space-xs);
+    font-size: var(--fs-4);
+    color: var(--text);
+  }
+
+  /* En vertical el subrayado animado estorba: el separador ya marca la fila */
+  .nav__link::after {
+    display: none;
+  }
+
+  .nav__link:active {
+    color: var(--accent-hover);
+  }
+
+  .nav__cta {
+    width: 100%;
+    margin-top: var(--space-2xs);
+    padding-block: 0.8125rem;
+    font-size: var(--fs-3);
+  }
+
+  .nav__logo-text {
+    font-size: var(--fs-5);
+  }
+}
+
+/* =============================================================================
+   3. HERO
+   ========================================================================== */
+
+.hero {
+  /* Medidas propias de la portada; el resto sale de los tokens globales */
+  --hero-title-size: clamp(2.5rem, 5vw + 0.6rem, 4.5rem);
+  --hero-indicator-offset: clamp(1.25rem, 3vh, 2.25rem);
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-top: calc(var(--nav-height) + var(--space-xl));
+  padding-bottom: calc(var(--space-3xl) + var(--hero-indicator-offset));
+
+  /* Capas, de arriba abajo: fundido al fondo en el borde inferior · velo
+     oscuro que garantiza el contraste del texto · fotografía de portada */
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(to top, var(--bg) 0%, rgba(10, 10, 10, 0) 18%),
+    linear-gradient(180deg,
+      rgba(10, 10, 10, 0.7) 0%,
+      rgba(10, 10, 10, 0.86) 58%,
+      rgba(10, 10, 10, 0.95) 100%),
+    url('../img/hero-bg.jpg');
+  background-repeat: no-repeat;
+  background-position: center, center, center;
+  background-size: cover;
+  background-attachment: scroll, scroll, fixed;
+}
+
+/* El fondo fijo provoca saltos y repintados costosos en táctil */
+@media (hover: none), (max-width: 767.98px) {
+  .hero {
+    background-attachment: scroll;
+  }
+}
+
+/* Halo rojo difuso tras el bloque de texto (div decorativo del marcado) */
+.hero__glow {
+  position: absolute;
+  z-index: -1;
+  top: 12%;
+  left: 50%;
+  width: min(78rem, 130%);
+  aspect-ratio: 1;
+  transform: translate(-50%, -18%);
+  background:
+    radial-gradient(circle at 32% 42%, var(--accent-glow) 0%, rgba(196, 30, 42, 0) 46%),
+    radial-gradient(circle at 68% 58%, rgba(196, 30, 42, 0.16) 0%, rgba(196, 30, 42, 0) 55%);
+  filter: blur(28px);
+  opacity: 0.85;
+  pointer-events: none;
+  animation: hero-glow 14s var(--ease) infinite alternate;
+}
+
+@keyframes hero-glow {
+  from { opacity: 0.55; transform: translate(-50%, -18%) scale(1); }
+  to   { opacity: 0.95; transform: translate(-50%, -14%) scale(1.08); }
+}
+
+.hero__inner {
+  position: relative;
+  z-index: var(--z-base);
+  max-width: var(--container-max);
+}
+
+/* --- Antetítulo con pulso -------------------------------------------- */
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: var(--space-3xs) var(--space-xs) var(--space-3xs) var(--space-2xs);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--text);
+  background-color: var(--accent-soft);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.hero__pulse {
+  position: relative;
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  flex: 0 0 auto;
+  background-color: var(--accent-hover);
+  border-radius: 50%;
+}
+
+.hero__pulse::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: var(--accent-hover);
+  animation: hero-pulse 2.4s var(--ease-out) infinite;
+}
+
+@keyframes hero-pulse {
+  0%   { transform: scale(1); opacity: 0.7; }
+  70%  { transform: scale(3); opacity: 0; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+/* --- Titular y texto -------------------------------------------------- */
+
+.hero__title {
+  max-width: 19ch;
+  margin-top: var(--space-md);
+  font-size: var(--hero-title-size);
+  line-height: 1.02;
+  letter-spacing: var(--ls-tight);
+  color: #fff;
+}
+
+.hero__title-accent {
+  font-style: italic;
+  color: var(--accent-hover);
+  /* El rojo sobre foto necesita un apoyo mínimo para no perder el borde */
+  text-shadow: 0 0 40px var(--accent-glow);
+}
+
+.hero__subtitle {
+  max-width: 58ch;
+  margin-top: var(--space-md);
+  font-size: var(--fs-5);
+  line-height: var(--lh-normal);
+  color: var(--text-muted);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+/* Elevación reforzada del CTA sobre la primitiva .btn de base.css */
+.hero__actions .btn--primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 48px -18px var(--accent-glow),
+              0 0 0 1px var(--accent-hover);
+}
+
+.hero__actions .btn--primary:active {
+  transform: translateY(-1px);
+}
+
+.hero__actions .btn--ghost {
+  background-color: rgba(20, 20, 20, 0.5);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.hero__actions .btn--ghost:hover {
+  transform: translateY(-3px);
+  background-color: var(--surface-raised);
+  box-shadow: var(--shadow);
+}
+
+.hero__note {
+  margin-top: var(--space-sm);
+  font-size: var(--fs-2);
+  color: var(--text-faint);
+}
+
+/* --- Indicadores numéricos ------------------------------------------- */
+
+.hero__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: var(--space-md) var(--space-lg);
+  max-width: 46rem;
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+}
+
+.hero__stat-label {
+  order: 2;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.hero__stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+}
+
+/* dd trae margen propio del agente de usuario */
+.hero__stat-value {
+  order: 1;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-7);
+  line-height: 1;
+  letter-spacing: var(--ls-tight);
+  color: var(--text);
+  /* Evita el baile de anchura mientras scroll.js anima el contador */
+  font-variant-numeric: tabular-nums;
+}
+
+/* =============================================================================
+   4. INDICADOR DE SCROLL
+   Sin marcado propio: hairline vertical (::before) y galón (::after) sobre el
+   borde inferior de la portada.
+   ========================================================================== */
+
+.hero::before {
+  content: '';
+  position: absolute;
+  z-index: var(--z-base);
+  left: 50%;
+  bottom: calc(var(--hero-indicator-offset) + 1.75rem);
+  width: 1px;
+  height: 2.75rem;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), var(--accent));
+  transform-origin: top center;
+  animation: hero-scroll-line 2.6s var(--ease) infinite;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  z-index: var(--z-base);
+  left: 50%;
+  bottom: var(--hero-indicator-offset);
+  width: 1.5rem;
+  height: 1.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e02535' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  animation: hero-scroll-chevron 2.6s var(--ease) infinite;
+  pointer-events: none;
+}
+
+@keyframes hero-scroll-line {
+  0%, 100% { transform: translateX(-50%) scaleY(0.35); opacity: 0.25; }
+  50%      { transform: translateX(-50%) scaleY(1);    opacity: 0.9; }
+}
+
+@keyframes hero-scroll-chevron {
+  0%, 100% { transform: translate(-50%, 0);       opacity: 0.45; }
+  50%      { transform: translate(-50%, 0.45rem); opacity: 1; }
+}
+
+/* Al bajar, scroll.js puede marcar la portada para retirar el indicador */
+.hero.is-scrolled::before,
+.hero.is-scrolled::after {
+  opacity: 0;
+  animation-play-state: paused;
+  transition: opacity var(--dur) var(--ease);
+}
+
+/* =============================================================================
+   5. ENTRADA ESCALONADA DE LA PORTADA
+   Animación de carga, independiente de scroll.js. Con prefers-reduced-motion
+   base.css reduce la duración a ~0 y el estado final (fill: both) se aplica
+   igualmente, así que nada queda invisible.
+   ========================================================================== */
+
+.hero__eyebrow,
+.hero__title,
+.hero__subtitle,
+.hero__actions,
+.hero__note,
+.hero__stats {
+  animation: hero-enter var(--dur-slow) var(--ease-out) both;
+}
+
+.hero__eyebrow  { animation-delay: 60ms; }
+.hero__title    { animation-delay: 140ms; }
+.hero__subtitle { animation-delay: 220ms; }
+.hero__actions  { animation-delay: 300ms; }
+.hero__note     { animation-delay: 360ms; }
+.hero__stats    { animation-delay: 420ms; }
+
+@keyframes hero-enter {
+  from { opacity: 0; transform: translateY(1.25rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =============================================================================
+   6. RESPONSIVE
+   ========================================================================== */
+
+/* Tabletas y móviles: texto centrado y respiración reducida */
+@media (max-width: 767.98px) {
+  .hero {
+    padding-top: calc(var(--nav-height) + var(--space-lg));
+    padding-bottom: calc(var(--space-2xl) + var(--hero-indicator-offset));
+    text-align: center;
+    background-position: 62% center;
+  }
+
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero__title,
+  .hero__subtitle {
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  .hero__title {
+    margin-top: var(--space-sm);
+  }
+
+  .hero__subtitle {
+    font-size: var(--fs-4);
+  }
+
+  .hero__actions {
+    justify-content: center;
+    width: 100%;
+    margin-top: var(--space-md);
+  }
+
+  .hero__actions .btn {
+    flex: 1 1 15rem;
+  }
+
+  .hero__stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-sm) var(--space-xs);
+    width: 100%;
+    margin-top: var(--space-xl);
+    text-align: center;
+  }
+
+  .hero__stat {
+    align-items: center;
+  }
+
+  .hero__stat-label {
+    font-size: 0.6875rem;
+    letter-spacing: var(--ls-snug);
+    text-transform: none;
+  }
+
+  .hero__stat-value {
+    font-size: var(--fs-6);
+  }
+
+  .hero__glow {
+    top: 6%;
+    width: 160%;
+    filter: blur(36px);
+  }
+}
+
+/* Móviles estrechos: los indicadores se apilan antes de llegar a partirse */
+@media (max-width: 400px) {
+  .hero__stats {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+  }
+
+  .hero__stat {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+    gap: var(--space-2xs);
+  }
+
+  .hero__stat-label {
+    text-align: left;
+  }
+}
+
+/* Ventanas bajas (portátiles pequeños, móvil en horizontal): la portada deja
+   de forzar el alto completo y el indicador de scroll sobra */
+@media (max-height: 640px) {
+  .hero {
+    min-height: auto;
+    padding-block: calc(var(--nav-height) + var(--space-xl)) var(--space-2xl);
+  }
+
+  .hero::before,
+  .hero::after {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* base.css ya colapsa las duraciones; aquí se retiran los bucles decorativos
+     para que no queden congelados en un fotograma intermedio */
+  .hero__glow,
+  .hero__pulse::after,
+  .hero::before,
+  .hero::after {
+    animation: none;
+  }
+
+  .hero::before {
+    transform: translateX(-50%);
+    opacity: 0.6;
+  }
+
+  .hero::after {
+    transform: translateX(-50%);
+    opacity: 0.8;
+  }
+
+  .hero__actions .btn--primary:hover,
+  .hero__actions .btn--ghost:hover {
+    transform: none;
+  }
+}
+
+@media print {
+  .hero {
+    min-height: auto;
+    padding-block: var(--space-md);
+    background-image: none;
+  }
+
+  .hero::before,
+  .hero::after {
+    display: none;
+  }
+}

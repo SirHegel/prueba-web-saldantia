@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0a">
+
+  <title>Saldantia — Automatización con IA para empresas</title>
+  <meta name="description" content="Saldantia diseña e implanta agentes de IA y automatizaciones a medida que eliminan el trabajo manual repetitivo. Menos procesos, más margen.">
+  <meta name="author" content="Saldantia">
+  <link rel="canonical" href="https://saldantia.com/">
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Saldantia">
+  <meta property="og:title" content="Saldantia — Automatización con IA para empresas">
+  <meta property="og:description" content="Agentes de IA y automatizaciones a medida que eliminan el trabajo manual repetitivo. Menos procesos, más margen.">
+  <meta property="og:url" content="https://saldantia.com/">
+  <meta property="og:image" content="https://saldantia.com/img/hero-bg.jpg">
+  <meta property="og:image:alt" content="Red neuronal abstracta en tonos rojos sobre fondo oscuro">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon en línea: evita una petición extra y un 404 en desarrollo -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0a'/%3E%3Cpath d='M20.5 10.5c-1.3-1-3-1.5-4.9-1.5-3.4 0-5.6 1.6-5.6 4.1 0 2.3 1.6 3.4 4.9 4.1 2.5.5 3.2.9 3.2 1.8 0 1-1 1.6-2.7 1.6-1.9 0-3.5-.6-4.8-1.7l-1.6 2.6c1.6 1.4 3.8 2.1 6.3 2.1 3.6 0 5.9-1.7 5.9-4.4 0-2.4-1.6-3.5-5.1-4.2-2.3-.5-3-.8-3-1.7 0-.9.9-1.4 2.4-1.4 1.5 0 2.9.5 4 1.3z' fill='%23c41e2a'/%3E%3C/svg%3E">
+
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+  <!-- Hojas de estilo: base define el sistema de diseño, el resto lo consume -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/servicios.css">
+  <link rel="stylesheet" href="css/secciones.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <!-- ============================ NAVEGACIÓN ============================ -->
+  <header class="nav" id="nav">
+    <div class="nav__inner container">
+      <a class="nav__logo" href="#hero" aria-label="Saldantia, inicio">
+        <span class="nav__logo-mark" aria-hidden="true">S</span>
+        <span class="nav__logo-text">Saldantia</span>
+      </a>
+
+      <nav class="nav__menu" id="nav-menu" aria-label="Navegación principal">
+        <ul class="nav__list">
+          <li class="nav__item"><a class="nav__link" href="#servicios">Servicios</a></li>
+          <li class="nav__item"><a class="nav__link" href="#casos">Casos de éxito</a></li>
+          <li class="nav__item"><a class="nav__link" href="#proceso">Proceso</a></li>
+          <li class="nav__item"><a class="nav__link" href="#contacto">Contacto</a></li>
+        </ul>
+        <a class="btn btn--primary btn--sm nav__cta" href="#contacto">Reservar diagnóstico</a>
+      </nav>
+
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú de navegación">
+        <span class="nav__toggle-bar" aria-hidden="true"></span>
+        <span class="nav__toggle-bar" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenido" tabindex="-1">
+
+    <!-- ============================== HERO ============================== -->
+    <section class="hero" id="hero" aria-labelledby="hero-titulo">
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="hero__inner container">
+        <p class="hero__eyebrow">
+          <span class="hero__pulse" aria-hidden="true"></span>
+          Automatización con IA para empresas
+        </p>
+
+        <h1 class="hero__title" id="hero-titulo">
+          El trabajo repetitivo <em class="hero__title-accent">ya no</em> lo hace tu equipo
+        </h1>
+
+        <p class="hero__subtitle">
+          Diseñamos e implantamos agentes de IA y automatizaciones a medida que absorben los
+          procesos manuales de tu empresa: presupuestos, pedidos, facturas, soporte y reporting.
+          Sin cambiar tus herramientas. En semanas, no en trimestres.
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn btn--primary btn--lg" href="#contacto">Reservar diagnóstico gratuito</a>
+          <a class="btn btn--ghost btn--lg" href="#servicios">Ver qué automatizamos</a>
+        </div>
+
+        <p class="hero__note">Diagnóstico de 45&nbsp;min · Sin compromiso · Informe con procesos priorizados</p>
+
+        <dl class="hero__stats">
+          <div class="hero__stat">
+            <dt class="hero__stat-label">Horas recuperadas al mes</dt>
+            <dd class="hero__stat-value" data-count="1400">+1.400</dd>
+          </div>
+          <div class="hero__stat">
+            <dt class="hero__stat-label">Procesos en producción</dt>
+            <dd class="hero__stat-value" data-count="60">60</dd>
+          </div>
+          <div class="hero__stat">
+            <dt class="hero__stat-label">Semanas hasta el primer flujo vivo</dt>
+            <dd class="hero__stat-value" data-count="3">3</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============================ SERVICIOS =========================== -->
+    <section class="seccion seccion--servicios" id="servicios" aria-labelledby="servicios-titulo">
+      <div class="container">
+        <header class="seccion__header">
+          <p class="seccion__eyebrow">Servicios</p>
+          <h2 class="seccion__title" id="servicios-titulo">
+            Cuatro formas de quitarle horas muertas a tu operación
+          </h2>
+          <p class="seccion__lead">
+            No vendemos licencias ni «proyectos de IA». Entregamos procesos concretos funcionando
+            dentro de tus sistemas, medidos en horas ahorradas y errores evitados.
+          </p>
+        </header>
+
+        <div class="servicios__grid">
+
+          <article class="card-servicio">
+            <span class="card-servicio__num" aria-hidden="true">01</span>
+            <div class="card-servicio__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="7" width="16" height="12" rx="3"></rect>
+                <path d="M12 3v4M9 13h.01M15 13h.01M9.5 16.5h5"></path>
+              </svg>
+            </div>
+            <h3 class="card-servicio__title">Agentes de IA a medida</h3>
+            <p class="card-servicio__text">
+              Asistentes que leen, deciden y ejecutan sobre tus datos reales: clasifican correos,
+              redactan respuestas, generan presupuestos y escalan a una persona cuando toca.
+            </p>
+            <ul class="card-servicio__list">
+              <li>Atención comercial y postventa 24/7</li>
+              <li>Cualificación y enrutado de leads</li>
+              <li>Base de conocimiento interna consultable</li>
+            </ul>
+          </article>
+
+          <article class="card-servicio">
+            <span class="card-servicio__num" aria-hidden="true">02</span>
+            <div class="card-servicio__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 6h7a3 3 0 0 1 3 3v6a3 3 0 0 0 3 3h3"></path>
+                <path d="M17 3l3 3-3 3M17 15l3 3-3 3"></path>
+              </svg>
+            </div>
+            <h3 class="card-servicio__title">Automatización de procesos</h3>
+            <p class="card-servicio__text">
+              Flujos que conectan ERP, CRM, correo y hojas de cálculo para que un pedido, una
+              factura o un alta de cliente recorra la empresa sin que nadie copie y pegue.
+            </p>
+            <ul class="card-servicio__list">
+              <li>Pedidos y albaranes de extremo a extremo</li>
+              <li>Conciliación y control de facturas</li>
+              <li>Altas, bajas y onboarding interno</li>
+            </ul>
+          </article>
+
+          <article class="card-servicio">
+            <span class="card-servicio__num" aria-hidden="true">03</span>
+            <div class="card-servicio__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 20V10M12 20V4M18 20v-7"></path>
+                <path d="M3 20h18"></path>
+              </svg>
+            </div>
+            <h3 class="card-servicio__title">Datos y reporting automático</h3>
+            <p class="card-servicio__text">
+              Unificamos las fuentes que hoy viven en Excel y montamos cuadros de mando que se
+              actualizan solos, con alertas cuando un indicador se sale de rango.
+            </p>
+            <ul class="card-servicio__list">
+              <li>Extracción documental (OCR + IA)</li>
+              <li>Cuadros de mando en tiempo real</li>
+              <li>Informes periódicos sin intervención</li>
+            </ul>
+          </article>
+
+          <article class="card-servicio">
+            <span class="card-servicio__num" aria-hidden="true">04</span>
+            <div class="card-servicio__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3l7.5 4v5c0 4.4-3 8.2-7.5 9-4.5-.8-7.5-4.6-7.5-9V7z"></path>
+                <path d="M9.5 12.2l1.8 1.8 3.4-3.6"></path>
+              </svg>
+            </div>
+            <h3 class="card-servicio__title">Consultoría e implantación segura</h3>
+            <p class="card-servicio__text">
+              Auditamos tus procesos, priorizamos por retorno y formamos al equipo. Todo con
+              trazabilidad, control de accesos y cumplimiento del RGPD desde el primer día.
+            </p>
+            <ul class="card-servicio__list">
+              <li>Auditoría y mapa de oportunidades</li>
+              <li>Formación práctica a equipos</li>
+              <li>Soporte y mejora continua</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== CASOS ============================= -->
+    <section class="seccion seccion--casos" id="casos" aria-labelledby="casos-titulo">
+      <div class="container">
+        <header class="seccion__header">
+          <p class="seccion__eyebrow">Casos de éxito</p>
+          <h2 class="seccion__title" id="casos-titulo">Resultados medidos, no promesas</h2>
+          <p class="seccion__lead">
+            Tres implantaciones reales. Mismo patrón: un proceso que dolía, un flujo automatizado
+            y un número que cambia en la cuenta de resultados.
+          </p>
+        </header>
+
+        <div class="casos__lista">
+
+          <article class="caso-exito">
+            <div class="caso-exito__meta">
+              <span class="caso-exito__sector">Distribución industrial</span>
+              <span class="caso-exito__tam">120 empleados</span>
+            </div>
+            <div class="caso-exito__body">
+              <h3 class="caso-exito__title">De 4 horas diarias tecleando pedidos a 20 minutos de revisión</h3>
+              <p class="caso-exito__text">
+                Recibían más de 300 pedidos semanales por correo en formatos distintos. Un agente
+                lee cada mensaje, extrae referencias y cantidades, valida stock y precio contra el
+                ERP y deja el pedido creado a la espera de un visto bueno humano.
+              </p>
+              <ul class="caso-exito__metricas">
+                <li class="caso-exito__metrica">
+                  <span class="caso-exito__metrica-valor">-82%</span>
+                  <span class="caso-exito__metrica-label">tiempo de gestión</span>
+                </li>
+                <li class="caso-exito__metrica">
+                  <span class="caso-exito__metrica-valor">-95%</span>
+                  <span class="caso-exito__metrica-label">errores de grabación</span>
+                </li>
+                <li class="caso-exito__metrica">
+                  <span class="caso-exito__metrica-valor">5 sem.</span>
+                  <span class="caso-exito__metrica-label">hasta producción</span>
+                </li>
+              </ul>
+              <blockquote class="caso-exito__quote">
+                <p>«El equipo de administración dejó de hacer de teclado y volvió a atender clientes.»</p>
+                <cite class="caso-exito__cite">Dirección de Operaciones</cite>
+              </blockquote>
+            </div>
+          </article>
+
+          <article class="caso-exito">
+            <div class="caso-exito__meta">
+              <span class="caso-exito__sector">Grupo de clínicas</span>
+              <span class="caso-exito__tam">9 centros</span>
+            </div>
+            <div class="caso-exito__body">
+              <h3 class="caso-exito__title">Agenda cubierta sin ampliar el equipo de recepción</h3>
+              <p class="caso-exito__text">
+                Perdían citas fuera de horario y en los picos de llamadas. Implantamos un agente de
+                voz y WhatsApp que reserva, reprograma y confirma sobre el mismo calendario, y que
+                pasa a una persona cualquier caso clínico o delicado.
+              </p>
+              <ul class="caso-exito__metricas">
+                <li class="caso-exito__metrica">
+                  <span class="caso-exito__metrica-valor">+34%</span>
+                  <span class="caso-exito__metrica-label">citas confirmadas</span>
+                </li>
+                <li class="caso-exito__metrica">
+                  <span class="caso-exito__metrica-valor">-61%</span>
+                  <span class="caso-exito__metrica-label">ausencias</span>
+                </li>
+                <li class="caso-exito__metrica">
+                  <span class="caso-exito__metrica-valor">24/7</span>
+                  <span class="caso-exito__metrica-label">disponibilidad</span>
+                </li>
+              </ul>
+              <blockquote class="caso-exito__quote">
+                <p>«Recuperamos las llamadas de las nueve de la noche, que antes simplemente se perdían.»</p>
+                <cite class="caso-exito__cite">Responsable de Atención al Paciente</cite>
+              </blockquote>
+            </div>
+          </article>
+
+          <article class="caso-exito">
+            <div class="caso-exito__meta">
+              <span class="caso-exito__sector">Asesoría fiscal y contable</span>
+              <span class="caso-exito__tam">40 empleados</span>
+            </div>
+            <div class="caso-exito__body">
+              <h3 class="caso-exito__title">Cierre mensual en dos días en lugar de nueve</h3>
+              <p class="caso-exito__text">
+                Cada cierre exigía clasificar miles de documentos a mano. Ahora se extraen, se
+                contabilizan según reglas por cliente y solo llegan al equipo las excepciones
+                reales, con el motivo señalado.
+              </p>
+              <ul class="caso-exito__metricas">
+                <li class="caso-exito__metrica">
+                  <span class="caso-exito__metrica-valor">-78%</span>
+                  <span class="caso-exito__metrica-label">duración del cierre</span>
+                </li>
+                <li class="caso-exito__metrica">
+                  <span class="caso-exito__metrica-valor">15 h</span>
+                  <span class="caso-exito__metrica-label">liberadas por semana</span>
+                </li>
+                <li class="caso-exito__metrica">
+                  <span class="caso-exito__metrica-valor">99,2%</span>
+                  <span class="caso-exito__metrica-label">precisión en extracción</span>
+                </li>
+              </ul>
+              <blockquote class="caso-exito__quote">
+                <p>«Hemos crecido en cartera sin contratar a nadie más para producción.»</p>
+                <cite class="caso-exito__cite">Socio director</cite>
+              </blockquote>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= PROCESO ============================ -->
+    <section class="seccion seccion--proceso" id="proceso" aria-labelledby="proceso-titulo">
+      <div class="container">
+        <header class="seccion__header">
+          <p class="seccion__eyebrow">Cómo trabajamos</p>
+          <h2 class="seccion__title" id="proceso-titulo">De la primera llamada al proceso vivo</h2>
+        </header>
+
+        <ol class="proceso__lista">
+          <li class="proceso__paso">
+            <span class="proceso__num" aria-hidden="true">01</span>
+            <h3 class="proceso__title">Diagnóstico</h3>
+            <p class="proceso__text">Sesión de 45 minutos para mapear procesos y estimar horas recuperables. Sales con un informe priorizado, contrates o no.</p>
+          </li>
+          <li class="proceso__paso">
+            <span class="proceso__num" aria-hidden="true">02</span>
+            <h3 class="proceso__title">Diseño</h3>
+            <p class="proceso__text">Definimos el flujo, los puntos de control humano y los criterios de éxito. Presupuesto cerrado, sin sorpresas.</p>
+          </li>
+          <li class="proceso__paso">
+            <span class="proceso__num" aria-hidden="true">03</span>
+            <h3 class="proceso__title">Implantación</h3>
+            <p class="proceso__text">Construimos e integramos con tus sistemas actuales. Primer flujo en producción en unas tres semanas.</p>
+          </li>
+          <li class="proceso__paso">
+            <span class="proceso__num" aria-hidden="true">04</span>
+            <h3 class="proceso__title">Medición y escalado</h3>
+            <p class="proceso__text">Monitorizamos, ajustamos y llevamos el siguiente proceso al mismo estándar. Todo queda documentado y en tu poder.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================ CONTACTO ============================ -->
+    <section class="seccion seccion--contacto" id="contacto" aria-labelledby="contacto-titulo">
+      <div class="container contacto__inner">
+
+        <div class="contacto__intro">
+          <p class="seccion__eyebrow">Contacto</p>
+          <h2 class="seccion__title" id="contacto-titulo">Cuéntanos qué proceso te está costando dinero</h2>
+          <p class="seccion__lead">
+            Respondemos en menos de 24 horas laborables con una primera valoración. Si no vemos
+            recorrido claro, te lo decimos en el primer correo.
+          </p>
+
+          <ul class="contacto__datos">
+            <li class="contacto__dato">
+              <span class="contacto__dato-label">Correo</span>
+              <a class="contacto__dato-valor" href="mailto:hola@saldantia.com">hola@saldantia.com</a>
+            </li>
+            <li class="contacto__dato">
+              <span class="contacto__dato-label">Teléfono</span>
+              <a class="contacto__dato-valor" href="tel:+34600000000">+34 600 00 00 00</a>
+            </li>
+            <li class="contacto__dato">
+              <span class="contacto__dato-label">Horario</span>
+              <span class="contacto__dato-valor">L–V, 9:00–18:00 (CET)</span>
+            </li>
+          </ul>
+        </div>
+
+        <form class="formulario" id="formulario-contacto" action="#" method="post" novalidate>
+          <div class="formulario__grid">
+
+            <div class="formulario__campo">
+              <label class="formulario__label" for="nombre">Nombre y apellidos</label>
+              <input class="formulario__input" type="text" id="nombre" name="nombre"
+                     autocomplete="name" placeholder="Ana García" required>
+            </div>
+
+            <div class="formulario__campo">
+              <label class="formulario__label" for="empresa">Empresa</label>
+              <input class="formulario__input" type="text" id="empresa" name="empresa"
+                     autocomplete="organization" placeholder="Nombre de tu empresa" required>
+            </div>
+
+            <div class="formulario__campo">
+              <label class="formulario__label" for="email">Correo profesional</label>
+              <input class="formulario__input" type="email" id="email" name="email"
+                     autocomplete="email" placeholder="ana@empresa.com" required>
+            </div>
+
+            <div class="formulario__campo">
+              <label class="formulario__label" for="telefono">
+                Teléfono <span class="formulario__opcional">(opcional)</span>
+              </label>
+              <input class="formulario__input" type="tel" id="telefono" name="telefono"
+                     autocomplete="tel" placeholder="+34 600 00 00 00">
+            </div>
+
+            <div class="formulario__campo formulario__campo--ancho">
+              <label class="formulario__label" for="servicio">¿Qué te interesa?</label>
+              <select class="formulario__input formulario__select" id="servicio" name="servicio" required>
+                <option value="" selected disabled>Selecciona una opción</option>
+                <option value="agentes">Agentes de IA a medida</option>
+                <option value="procesos">Automatización de procesos</option>
+                <option value="datos">Datos y reporting automático</option>
+                <option value="consultoria">Consultoría e implantación</option>
+                <option value="otro">Aún no lo tengo claro</option>
+              </select>
+            </div>
+
+            <div class="formulario__campo formulario__campo--ancho">
+              <label class="formulario__label" for="mensaje">¿Qué proceso quieres automatizar?</label>
+              <textarea class="formulario__input formulario__textarea" id="mensaje" name="mensaje" rows="5"
+                        placeholder="Ej.: recibimos 300 pedidos por correo a la semana y los grabamos a mano en el ERP." required></textarea>
+            </div>
+
+            <div class="formulario__campo formulario__campo--ancho formulario__campo--consent">
+              <input class="formulario__check" type="checkbox" id="consentimiento" name="privacidad" required>
+              <label class="formulario__label formulario__label--inline" for="consentimiento">
+                He leído y acepto la <a href="legal/privacidad.html">política de privacidad</a> y el tratamiento
+                de mis datos para responder a esta consulta.
+              </label>
+            </div>
+
+          </div>
+
+          <button class="btn btn--primary btn--lg formulario__submit" type="submit">
+            Solicitar diagnóstico gratuito
+          </button>
+
+          <p class="formulario__nota" role="status" aria-live="polite">
+            Sin listas de correo ni llamadas insistentes: una respuesta, y tú decides.
+          </p>
+        </form>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================== FOOTER ============================= -->
+  <footer class="footer">
+    <div class="container footer__inner">
+
+      <div class="footer__marca">
+        <a class="nav__logo footer__logo" href="#hero" aria-label="Saldantia, inicio">
+          <span class="nav__logo-mark" aria-hidden="true">S</span>
+          <span class="nav__logo-text">Saldantia</span>
+        </a>
+        <p class="footer__claim">
+          Automatización con IA para empresas que prefieren invertir su tiempo en crecer,
+          no en repetir.
+        </p>
+      </div>
+
+      <nav class="footer__nav" aria-label="Enlaces del pie de página">
+        <div class="footer__col">
+          <h2 class="footer__col-title">Servicios</h2>
+          <ul class="footer__lista">
+            <li><a class="footer__link" href="#servicios">Agentes de IA</a></li>
+            <li><a class="footer__link" href="#servicios">Automatización de procesos</a></li>
+            <li><a class="footer__link" href="#servicios">Datos y reporting</a></li>
+            <li><a class="footer__link" href="#servicios">Consultoría</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h2 class="footer__col-title">Empresa</h2>
+          <ul class="footer__lista">
+            <li><a class="footer__link" href="#casos">Casos de éxito</a></li>
+            <li><a class="footer__link" href="#proceso">Proceso</a></li>
+            <li><a class="footer__link" href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h2 class="footer__col-title">Legal</h2>
+          <ul class="footer__lista">
+            <li><a class="footer__link" href="legal/aviso-legal.html">Aviso legal</a></li>
+            <li><a class="footer__link" href="legal/privacidad.html">Privacidad</a></li>
+            <li><a class="footer__link" href="legal/cookies.html">Cookies</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="footer__bottom">
+        <p class="footer__copy">© <span id="anio">2026</span> Saldantia. Todos los derechos reservados.</p>
+        <ul class="footer__social">
+          <li><a class="footer__link" href="https://www.linkedin.com/" rel="noopener noreferrer" target="_blank">LinkedIn</a></li>
+          <li><a class="footer__link" href="mailto:hola@saldantia.com">hola@saldantia.com</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Saldantia",
+    "description": "Automatización de procesos empresariales con agentes de IA a medida.",
+    "url": "https://saldantia.com/",
+    "email": "hola@saldantia.com",
+    "telephone": "+34600000000",
+    "areaServed": "ES",
+    "knowsLanguage": "es",
+    "serviceType": [
+      "Agentes de IA a medida",
+      "Automatización de procesos",
+      "Datos y reporting automático",
+      "Consultoría de IA"
+    ]
+  }
+  </script>
+
+  <script src="js/scroll.js" defer></script>
+</body>
+</html>

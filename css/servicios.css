@@ -1,0 +1,272 @@
+/* =============================================================================
+   SALDANTIA — servicios.css
+   Sección de servicios: encabezado y grid de tarjetas.
+   Consume exclusivamente tokens de base.css. La envoltura `.seccion` y la
+   animación de aparición `.reveal` viven allí; aquí no se redefinen.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   1. ENCABEZADO DE SECCIÓN (compartible con otras secciones)
+   La envoltura `.seccion` vive en base.css; aquí solo se estilan el
+   modificador de esta sección y el encabezado que comparten todas.
+   ------------------------------------------------------------------------ */
+
+/* Modificador explícito del bloque para evitar que el hook del HTML quede
+   huérfano y asegurar una superficie estable entre hero y casos. */
+.seccion--servicios {
+  background-color: var(--bg);
+}
+
+.seccion__header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+  max-width: var(--container-narrow);
+  margin-inline: auto;
+}
+
+/* Eyebrow: etiqueta superior con acento rojo */
+.seccion__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  font-family: var(--font-body);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--accent-text);
+  margin-bottom: var(--space-md);
+}
+
+.seccion__eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* Título de sección: Instrument Serif + línea accent debajo */
+.seccion__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-7);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--text);
+  text-wrap: balance;
+  margin-bottom: var(--space-md);
+}
+
+.seccion__title::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background-color: var(--accent);
+  border-radius: var(--radius-pill);
+  margin: var(--space-md) auto 0;
+}
+
+/* Lead: párrafo introductorio */
+.seccion__lead {
+  font-size: var(--fs-5);
+  line-height: var(--lh-normal);
+  color: var(--text-muted);
+  text-wrap: pretty;
+  max-width: 56ch;
+  margin-inline: auto;
+}
+
+/* ---------------------------------------------------------------------------
+   2. GRID DE SERVICIOS
+   4 columnas desktop → 2 tablet → 1 móvil
+   ------------------------------------------------------------------------ */
+.servicios__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .servicios__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .servicios__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   3. TARJETA DE SERVICIO
+   ------------------------------------------------------------------------ */
+.card-servicio {
+  position: relative;
+  background-color: var(--surface-raised);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  transition: transform var(--dur) var(--ease-out),
+              box-shadow var(--dur-slow) var(--ease),
+              border-color var(--dur) var(--ease);
+  will-change: transform;
+}
+
+.card-servicio:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px -16px rgba(0, 0, 0, 0.55),
+              0 0 0 1px rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Número de orden (01, 02…) */
+.card-servicio__num {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wide);
+  color: var(--text-faint);
+  line-height: 1;
+  user-select: none;
+  transition: color var(--dur) var(--ease);
+}
+
+.card-servicio:hover .card-servicio__num {
+  color: var(--text-muted);
+}
+
+/* ---------------------------------------------------------------------------
+   3a. ICONO
+   Contenedor cuadrado con fondo accent-soft y SVG en color accent.
+   ------------------------------------------------------------------------ */
+.card-servicio__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background-color: var(--accent-soft);
+  color: var(--accent-hover);
+  flex-shrink: 0;
+  transition: background-color var(--dur) var(--ease),
+              color var(--dur) var(--ease);
+}
+
+.card-servicio__icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+}
+
+.card-servicio:hover .card-servicio__icon {
+  background-color: rgba(196, 30, 42, 0.22);
+  color: #ff3d4d;
+}
+
+/* ---------------------------------------------------------------------------
+   3b. TÍTULO Y TEXTO
+   ------------------------------------------------------------------------ */
+.card-servicio__title {
+  font-family: var(--font-body);
+  font-size: var(--fs-4);
+  font-weight: 600;
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-snug);
+  color: var(--text);
+  margin-top: var(--space-2xs);
+}
+
+.card-servicio__text {
+  font-size: var(--fs-3);
+  line-height: var(--lh-normal);
+  color: var(--text-muted);
+}
+
+/* ---------------------------------------------------------------------------
+   3c. LISTA DE DETALLE
+   Pequeños bullets con marcador accent.
+   ------------------------------------------------------------------------ */
+.card-servicio__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  padding-top: var(--space-xs);
+  margin-top: auto;                /* Empuja la lista al fondo de la tarjeta */
+  border-top: 1px solid var(--border);
+}
+
+.card-servicio__list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: var(--fs-2);
+  line-height: var(--lh-snug);
+  color: var(--text-muted);
+}
+
+.card-servicio__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  opacity: 0.6;
+}
+
+/* ---------------------------------------------------------------------------
+   4. AJUSTES RESPONSIVOS FINOS
+   ------------------------------------------------------------------------ */
+@media (max-width: 1024px) {
+  .seccion__header {
+    margin-bottom: var(--space-xl);
+  }
+}
+
+@media (max-width: 600px) {
+  .seccion__header {
+    margin-bottom: var(--space-lg);
+  }
+
+  .seccion__title::after {
+    margin-top: var(--space-sm);
+  }
+
+  .card-servicio {
+    padding: 24px;
+  }
+
+  /* Desactivar hover en táctiles */
+  .card-servicio:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   5. MOVIMIENTO REDUCIDO
+   ------------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .card-servicio {
+    transition: none;
+  }
+
+  .card-servicio:hover {
+    transform: none;
+  }
+}

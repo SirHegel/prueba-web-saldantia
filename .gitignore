@@ -1,0 +1,44 @@
+# Variables de entorno
+.env
+*.env
+
+# Entornos virtuales Python
+.venv/
+venv/
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+
+# Temporales
+*.tmp
+
+# Archivos sensibles (seguridad)
+*.key
+*.pem
+*.cert
+*.p12
+*.pfx
+
+# Bases de datos locales
+*.db
+*.sqlite
+*.sqlite3
+
+# Cache Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

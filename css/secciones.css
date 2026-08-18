@@ -1,0 +1,758 @@
+/* =============================================================================
+   SALDANTIA — secciones.css
+   Casos de éxito (#casos), proceso (#proceso), contacto (#contacto) y footer.
+
+   Reglas de convivencia con el resto de hojas:
+   - Todo valor sale de un token de base.css. Cero hex ni px sueltos salvo
+     hairlines de 1px y alturas mínimas de control.
+   - Lo transversal (.container, .btn, reset de inputs) ya vive en base.css y
+     aquí solo se extiende; no se redefine.
+   - Los bloques compartidos entre secciones (.seccion__header y familia) se
+     escriben ACOTADOS a las secciones de esta hoja, para no pisar el trabajo
+     de hero.css ni de servicios.css, que se escriben en paralelo.
+   - Lo que pertenece a otra hoja y aquí solo necesita un mínimo de respaldo
+     (p. ej. .nav__logo dentro del footer) se envuelve en :where() para que
+     tenga especificidad 0 y su hoja propietaria siempre gane.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   1. ENCABEZADOS DE ESTAS SECCIONES
+   La envoltura `.seccion` y su ritmo vertical viven en base.css.
+   ------------------------------------------------------------------------ */
+/* Ámbito local de esta hoja. Se repite en cada selector para no filtrar
+   estilos a #servicios, cuya hoja escribe otra IA. */
+:is(.seccion--casos, .seccion--proceso, .seccion--contacto) .seccion__header {
+  max-width: 46rem;
+  margin-bottom: var(--space-2xl);
+}
+
+:is(.seccion--casos, .seccion--proceso, .seccion--contacto) .seccion__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  margin-bottom: var(--space-sm);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Punto de acento delante de la etiqueta */
+:is(.seccion--casos, .seccion--proceso, .seccion--contacto) .seccion__eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+:is(.seccion--casos, .seccion--proceso, .seccion--contacto) .seccion__title {
+  margin-bottom: var(--space-md);
+}
+
+:is(.seccion--casos, .seccion--proceso, .seccion--contacto) .seccion__lead {
+  max-width: 60ch;
+  font-size: var(--fs-5);
+  line-height: var(--lh-snug);
+  color: var(--text-muted);
+}
+
+/* ---------------------------------------------------------------------------
+   2. REVELADO AL HACER SCROLL
+   `.reveal` y `.reveal--visible` se definen en base.css, que es la unica hoja
+   que fija el contrato con js/scroll.js. Aqui no se redefinen.
+   ------------------------------------------------------------------------ */
+
+/* ---------------------------------------------------------------------------
+   3. CASOS DE ÉXITO
+   Cada caso alterna el lado de la columna de contexto (sector y tamaño) para
+   crear un zigzag legible; el cuerpo mantiene siempre el mismo eje de lectura.
+   ------------------------------------------------------------------------ */
+.casos__lista {
+  display: flex;
+  flex-direction: column;
+}
+
+.caso-exito {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(var(--space-lg), 5vw, var(--space-2xl));
+  padding-block: var(--space-2xl);
+}
+
+.caso-exito:first-child {
+  padding-block-start: 0;
+}
+
+.caso-exito:last-child {
+  padding-block-end: 0;
+}
+
+/* Alterna el lado: el 2.º caso lleva el contexto a la derecha */
+.caso-exito:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+/* Separador sutil entre casos: hairline que se desvanece en los extremos */
+.caso-exito + .caso-exito::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+}
+
+/* --- Columna de contexto --- */
+.caso-exito__meta {
+  flex: 0 0 clamp(9.5rem, 19%, 14rem);
+  align-self: flex-start;
+  position: sticky;
+  top: calc(var(--nav-height) + var(--space-lg));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  align-items: flex-start;
+}
+
+.caso-exito:nth-child(even) .caso-exito__meta {
+  align-items: flex-end;
+  text-align: right;
+}
+
+/* Radio medio y no pastilla: los sectores largos ocupan dos líneas en la
+   columna estrecha y una pastilla partida se lee como un error. */
+.caso-exito__sector {
+  padding: 0.4375rem 0.75rem;
+  background-color: var(--accent-soft);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wide);
+  line-height: 1.45;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: var(--accent-text);
+}
+
+.caso-exito__tam {
+  font-size: var(--fs-2);
+  color: var(--text-faint);
+}
+
+/* --- Cuerpo del caso --- */
+.caso-exito__body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.caso-exito__title {
+  max-width: 24ch;
+  margin-bottom: var(--space-sm);
+}
+
+.caso-exito__text {
+  max-width: 62ch;
+  color: var(--text-muted);
+}
+
+/* --- Bloque de métricas --- */
+.caso-exito__metricas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin-block: var(--space-xl);
+  padding-block-start: var(--space-md);
+  border-top: 1px solid var(--border);
+}
+
+.caso-exito__metrica {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+}
+
+/* El número protagonista. Se usa --accent-hover y no --accent porque sobre
+   #0a0a0a el acento base no alcanza el 3:1 exigible a texto grande. */
+.caso-exito__metrica-valor {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 1.2vw + 1.9rem, 3rem);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--accent-hover);
+  font-variant-numeric: tabular-nums;
+}
+
+.caso-exito__metrica-label {
+  font-size: var(--fs-2);
+  line-height: var(--lh-snug);
+  color: var(--text-muted);
+  text-wrap: balance;
+}
+
+/* --- Cita --- */
+.caso-exito__quote {
+  max-width: 54ch;
+  padding-left: var(--space-md);
+  border-left: 2px solid var(--accent);
+  color: var(--text);
+}
+
+.caso-exito__quote p {
+  font-style: italic;
+}
+
+.caso-exito__cite {
+  display: block;
+  margin-top: var(--space-2xs);
+  font-size: var(--fs-2);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+/* ---------------------------------------------------------------------------
+   4. PROCESO
+   Cuatro pasos en fila, unidos por una guía horizontal que arranca en el
+   acento y se apaga hacia el final del recorrido.
+   ------------------------------------------------------------------------ */
+.proceso__lista {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-lg);
+}
+
+.proceso__paso {
+  position: relative;
+  padding-block-start: var(--space-lg);
+}
+
+/* Guía: línea superior por paso, con nodo en el arranque */
+.proceso__paso::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background-color: var(--border);
+}
+
+.proceso__paso::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-pill);
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border-strong);
+  transition: background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+
+.proceso__paso:first-child::after {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 14px var(--accent-glow);
+}
+
+.proceso__num {
+  display: block;
+  margin-bottom: var(--space-2xs);
+  font-family: var(--font-display);
+  font-size: var(--fs-6);
+  line-height: 1;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.proceso__title {
+  font-size: var(--fs-5);
+  margin-bottom: var(--space-2xs);
+}
+
+.proceso__text {
+  font-size: var(--fs-3);
+  color: var(--text-muted);
+}
+
+/* ---------------------------------------------------------------------------
+   5. CONTACTO
+   Dos columnas: argumento y datos a la izquierda (fijos al hacer scroll),
+   formulario en panel elevado a la derecha.
+   ------------------------------------------------------------------------ */
+.seccion--contacto {
+  background-image:
+    radial-gradient(60% 50% at 50% 0%, var(--accent-soft) 0%, transparent 70%),
+    linear-gradient(180deg, var(--bg) 0%, var(--surface-sunken) 100%);
+  border-top: 1px solid var(--border);
+}
+
+.contacto__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(var(--space-xl), 6vw, var(--space-3xl));
+  align-items: start;
+}
+
+.contacto__intro {
+  position: sticky;
+  top: calc(var(--nav-height) + var(--space-xl));
+}
+
+/* --- Datos de contacto --- */
+.contacto__datos {
+  margin-top: var(--space-xl);
+  border-top: 1px solid var(--border);
+}
+
+.contacto__dato {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-block: var(--space-xs);
+  border-bottom: 1px solid var(--border);
+}
+
+.contacto__dato-label {
+  flex: 0 0 auto;
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.contacto__dato-valor {
+  font-size: var(--fs-3);
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+a.contacto__dato-valor {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+  transition: color var(--dur-fast) var(--ease),
+              text-decoration-color var(--dur-fast) var(--ease);
+}
+
+a.contacto__dato-valor:hover {
+  color: var(--accent-text);
+  text-decoration-color: currentColor;
+}
+
+/* --- Panel del formulario --- */
+.formulario {
+  padding: clamp(var(--space-md), 3vw, var(--space-xl));
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.formulario__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+.formulario__campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+  min-width: 0;
+}
+
+/* Select, textarea y consentimiento ocupan la fila completa */
+.formulario__campo--ancho {
+  grid-column: 1 / -1;
+}
+
+.formulario__label {
+  font-size: var(--fs-2);
+  font-weight: var(--fw-medium);
+  color: var(--text-muted);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+/* La etiqueta acompaña al campo activo */
+.formulario__campo:focus-within .formulario__label {
+  color: var(--text);
+}
+
+.formulario__opcional {
+  font-weight: var(--fw-regular);
+  color: var(--text-faint);
+}
+
+/* El reset de inputs vive en base.css; aquí solo el foco con halo de acento */
+.formulario__input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft),
+              0 10px 28px -14px var(--accent-glow);
+}
+
+.formulario__textarea {
+  min-height: 9.5rem;
+  line-height: var(--lh-normal);
+}
+
+.formulario__select:invalid {
+  color: var(--text-faint);
+}
+
+/* Error solo cuando la persona ya ha interactuado con el campo */
+.formulario__input:user-invalid {
+  border-color: var(--danger);
+}
+
+.formulario__input:user-invalid:focus {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 18%, transparent);
+}
+
+/* --- Consentimiento --- */
+.formulario__campo--consent {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--space-2xs);
+  margin-top: var(--space-3xs);
+}
+
+.formulario__check {
+  margin-top: 0.2em;
+}
+
+.formulario__label--inline {
+  font-size: var(--fs-2);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-normal);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+/* --- Envío --- */
+.formulario__submit {
+  margin-top: var(--space-lg);
+  width: 100%;
+}
+
+.formulario__nota {
+  margin-top: var(--space-sm);
+  font-size: var(--fs-2);
+  text-align: center;
+  color: var(--text-faint);
+  text-wrap: balance;
+}
+
+/* ---------------------------------------------------------------------------
+   6. FOOTER
+   Un escalón por debajo del fondo general para cerrar la página.
+   ------------------------------------------------------------------------ */
+.footer {
+  background-color: var(--surface-sunken);
+  border-top: 1px solid var(--border);
+  padding-block: var(--space-2xl) var(--space-xl);
+}
+
+.footer__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr);
+  gap: var(--space-2xl);
+}
+
+/* --- Marca --- */
+.footer__marca {
+  max-width: 34ch;
+}
+
+/* Respaldo de especificidad 0: si hero.css define el logo, su regla manda */
+:where(.footer__logo) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  font-family: var(--font-display);
+  font-size: var(--fs-5);
+  line-height: 1;
+  color: var(--text);
+}
+
+:where(.footer__logo .nav__logo-mark) {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--accent);
+  color: var(--text-on-accent);
+  font-family: var(--font-body);
+  font-size: var(--fs-3);
+  font-weight: var(--fw-bold);
+}
+
+.footer__claim {
+  margin-top: var(--space-sm);
+  font-size: var(--fs-3);
+  color: var(--text-muted);
+}
+
+/* --- Columnas de enlaces --- */
+.footer__nav {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-lg);
+}
+
+.footer__col {
+  min-width: 0;
+}
+
+.footer__col-title {
+  margin-bottom: var(--space-sm);
+  font-family: var(--font-body);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.footer__lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.footer__link {
+  display: inline-block;
+  font-size: var(--fs-2);
+  color: var(--text-muted);
+}
+
+.footer__link:hover {
+  color: var(--text);
+}
+
+/* --- Línea inferior --- */
+.footer__bottom {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm) var(--space-lg);
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+}
+
+.footer__copy {
+  font-size: var(--fs-2);
+  color: var(--text-faint);
+}
+
+.footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+/* ---------------------------------------------------------------------------
+   7. ADAPTACIÓN — 1024px
+   Se conserva el zigzag de los casos, se relaja el ritmo y el proceso pasa a
+   dos filas de dos.
+   ------------------------------------------------------------------------ */
+@media (max-width: 1024px) {
+  :is(.seccion--casos, .seccion--proceso, .seccion--contacto) .seccion__header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .caso-exito {
+    gap: var(--space-lg);
+    padding-block: var(--space-xl);
+  }
+
+  .caso-exito__meta {
+    flex-basis: clamp(8rem, 22%, 11rem);
+  }
+
+  .proceso__lista {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-xl) var(--space-lg);
+  }
+
+  .contacto__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2xl);
+  }
+
+  .contacto__intro {
+    position: static;
+  }
+
+  .contacto__datos {
+    max-width: 34rem;
+  }
+
+  .footer__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   8. ADAPTACIÓN — 768px
+   Los casos se apilan (el contexto pasa arriba, en fila) y el formulario deja
+   de ser de dos columnas.
+   ------------------------------------------------------------------------ */
+@media (max-width: 768px) {
+  .caso-exito,
+  .caso-exito:nth-child(even) {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .caso-exito__meta,
+  .caso-exito:nth-child(even) .caso-exito__meta {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--space-2xs) var(--space-xs);
+    text-align: left;
+  }
+
+  .caso-exito__title {
+    max-width: none;
+  }
+
+  .caso-exito__metricas {
+    margin-block: var(--space-lg);
+    gap: var(--space-sm);
+  }
+
+  .formulario__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .footer__nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-lg) var(--space-md);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   9. ADAPTACIÓN — 480px
+   Métricas en filas separadas por hairline, proceso en una columna y pie
+   completamente apilado.
+   ------------------------------------------------------------------------ */
+@media (max-width: 480px) {
+  .caso-exito__metricas {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .caso-exito__metrica {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding-block: var(--space-xs);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .caso-exito__metrica-label {
+    text-align: right;
+  }
+
+  .caso-exito__quote {
+    padding-left: var(--space-sm);
+  }
+
+  .proceso__lista {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .contacto__dato {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3xs);
+  }
+
+  .contacto__dato-valor {
+    text-align: left;
+  }
+
+  .footer {
+    padding-block: var(--space-xl) var(--space-lg);
+  }
+
+  .footer__nav {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-md);
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   10. PREFERENCIAS DEL USUARIO E IMPRESIÓN
+   ------------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .caso-exito__meta,
+  .contacto__intro {
+    position: static;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .caso-exito__tam,
+  .caso-exito__cite,
+  .contacto__dato-label,
+  .footer__copy,
+  .footer__col-title,
+  .formulario__nota {
+    color: var(--text-muted);
+  }
+
+  .formulario {
+    border-color: var(--border-strong);
+  }
+}
+
+@media print {
+  .caso-exito,
+  .caso-exito:nth-child(even) {
+    flex-direction: column;
+    page-break-inside: avoid;
+  }
+
+  .caso-exito__meta,
+  .contacto__intro {
+    position: static;
+  }
+
+  .seccion--contacto {
+    background: none;
+  }
+
+  .formulario,
+  .footer {
+    box-shadow: none;
+    background: none;
+  }
+}
